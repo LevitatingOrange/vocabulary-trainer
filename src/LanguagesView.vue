@@ -12,7 +12,7 @@
     <div class="content">
 	<ul class="languages">
 	    <li v-for="language in languages">
-		<form class="language" @submit.prevent="selectLanguage($index)">
+		<form class="change-language" @submit.prevent="selectLanguage($index)">
 		    <input type="text" v-model="language"/>
 		    <button class="select" type="submit">
 			<i class="fa fa-angle-right fa-lg"></i>
@@ -22,6 +22,12 @@
 	</ul>
     </div>
     <div class="footer-bar">
+	<form class="edit-language" @submit.prevent="newLanguage">
+	    <input type="text" v-model="newLanguageInput"/>
+	    <button class="select" type="submit">
+		<i class="fa fa-plus fa-lg"></i>
+	    </button>
+	</form>
     </div>
 </template>
 
@@ -31,12 +37,17 @@
 
      props: {
 	 native: String,
-	 languages: []
+	 languages: [],
+	 newLanguageInput: ""
      },
 
      methods: {
 	 selectLanguage: function(index) {
 	     this.$dispatch("select-language", index);
+	 },
+	 newLanguage: function() {
+	     this.languages.push(this.newLanguageInput);
+	     this.newLanguageInput = "";
 	 }
      }
  }
@@ -50,7 +61,7 @@
      width: 300px;
      
  }
- .language {
+ .change-language, .edit-language {
      display: flex;
      flex-direction: row;
      justify-content: space-between;

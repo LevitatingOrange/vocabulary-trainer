@@ -28,11 +28,7 @@
      },
      methods: {
 	 submitLanguage: function (event) {
-	     if (!this.currentInput || /^\s*$/.test(this.currentInput)) {
-		 console.log("Bad input!");
-	     } else {
-		 this.$dispatch("nativeCreated", this.currentInput);
-	     }
+	     this.$dispatch("nativeCreated", this.currentInput);
 	 }
      }
  }
