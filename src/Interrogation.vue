@@ -26,7 +26,7 @@
 	    <div class="to">
 		<form @submit.prevent="checkInput">
 		    <i class="ion-chevron-right"></i>
-		    <input class="to-input" type="text" v-model="currentInput"/>
+		    <input class="to-input" type="text" v-model="currentInput" v-el:first-input/>
 		    <i class="ion-chevron-left"></i>
 		    <button class="answer-button" type="submit"></button>
 		</form>
@@ -61,6 +61,14 @@
 	 }
      },
      methods: {
+	 reset: function() {
+	     this.reverse = false;
+	     this.currentWord = {};
+	     this.currentInput = "";
+	     this.counter = 0;
+	     this.counterCorrect = 0;
+	     this.finished = false;
+	 },
 	 checkInput: function (event) {
 	     this.counter = this.counter + 1;
 	     const other = this.reverse ? this.currentWord.other : this.currentWord.native;
@@ -68,6 +76,7 @@
 		 this.counterCorrect = this.counterCorrect + 1;
 	     }
 	     this.selectNewWord();
+	     this.$els.firstInput.focus();
 	 },
 	 selectNewWord: function() {
 	     if (this.counter >= this.total) {
@@ -84,9 +93,11 @@
 	 }
      },
      watch: {
-	 shown: function(oldVal, newVal) {
+	 shown: function(newVal, oldVal) {
 	     if (newVal && !oldVal) {
+		 this.reset();
 		 this.selectNewWord();
+		 this.$els.firstInput.focus();
 	     }
 	 }
      }

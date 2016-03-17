@@ -42,7 +42,7 @@
 		    <tfoot>
 			<tr class="word">
 			    <td>
-				<input class="word-input" v-model="newNative" placeholder="native"/>
+				<input class="word-input" v-model="newNative" placeholder="native" v-el:first-input/>
 			    </td>
 			    <td>
 				<input class="word-input" v-model="newOther" placeholder="other"/>
@@ -114,6 +114,15 @@
 	     });
 	     this.newNative = "";
 	     this.newOther = "";
+	     this.$els.firstInput.focus();
+	 }
+     },
+     
+     watch: {
+	 shown: function(newVal, oldVal) {
+	     if (newVal && !oldVal) {
+		 this.$els.firstInput.focus();
+	     }
 	 }
      }
  }

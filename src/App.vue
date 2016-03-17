@@ -20,16 +20,9 @@
 		       :words="words[selectedLanguage]"
 		       :native-language="nativeLanguage"
 		       :other-language="selectedLanguage"
-		       :total"10"
+		       :total="10"
 		       :shown="currentView == 3">
 	</interrogation>
-	<!--
-	     <native-view></native-view>
-	     <interrogation :words.once="words" native-lang="German" other-lang="English" :total="10"></interrogation>
-	     <languages-view :other-languages.sync="['english', 'italian']" native-language="German"></languages-view>
-	     <vocabulary-view :words="words" other-language="Italian" native-language="German">
-	     </vocabulary-view>
-	-->
     </div>
 </template>
 

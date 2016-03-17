@@ -23,7 +23,7 @@
 		</li>
 		<li>
 		    <form class="edit-language" @submit.prevent="addLanguage">
-			<input type="text" v-model="newLanguage"/>
+			<input type="text" v-model="newLanguage" v-el:first-input/>
 			<button type="submit">
 			    <i class="ion-plus"></i>
 			</button>
@@ -54,9 +54,17 @@
 	 addLanguage: function() {
 	     this.otherLanguages.push(this.newLanguage);
 	     this.newLanguage = "";
+	     this.$els.firstInput.focus();
 	 },
 	 removeLanguage: function(index) {
 	     this.otherLanguages.splice(index, 1);
+	 }
+     },
+     watch: {
+	 shown: function(newVal, oldVal) {
+	     if (newVal && !oldVal) {
+		 this.$els.firstInput.focus();
+	     }
 	 }
      }
  }

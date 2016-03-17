@@ -7,7 +7,7 @@
 	</div>
 	<div class="content">
 	    <form @submit.prevent="submitLanguage">
-		<input type="text" v-model="currentInput" autofocus/>
+		<input type="text" v-model="currentInput" v-el:first-input/>
 		<button type="submit">
 		    <i class="ion-chevron-right"></i>
 		</button>
@@ -32,10 +32,23 @@
 	     currentInput: "",
 	 }
      },
+     created () {
+	 this.$nextTick(function () {
+	     this.$els.firstInput.focus();
+	 });
+     },
      methods: {
 	 submitLanguage: function (event) {
 	     this.$dispatch("native-created", this.currentInput);
 	 }
      },
+     watch: {
+	 shown: function(newVal, oldVal) {
+	     if (newVal && !oldVal) {
+		 this.selectNewWord();
+		 this.$els.firstInput.focus();
+	     }
+	 }
+     }
  }
 </script>
