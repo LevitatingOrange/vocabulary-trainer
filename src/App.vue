@@ -4,9 +4,9 @@
     <div id="app">
 	<!--
 	<native-view></native-view>
-	<languages-view :languages.sync="['english', 'italian']" native="German"></languages-view>
-	-->
 	<interrogation :words.once="words" native-lang="German" other-lang="English" :total="10"></interrogation>
+	-->
+	<languages-view :languages.sync="['english', 'italian']" native="German"></languages-view>
     </div>
 </template>
 

@@ -32,7 +32,6 @@ body {
 }
 
 .header-bar {
-    margin-bottom: 5px;
     border-bottom: solid;
 }
 
@@ -47,7 +46,6 @@ body {
 }
 
 .footer-bar {
-    margin-top: 5px;
     border-top: solid;
 }
 
@@ -62,6 +60,10 @@ body {
     border-width: 0.5px;
     border-color: #A0A0A0;
     font-weight: 300;
+}
+
+.content {
+    padding: 5px;
 }
 
 input {
@@ -84,6 +86,11 @@ input:focus {
     border: none;
     background-color: #FFFFFF;
     cursor: pointer;
+    padding: 0px;
+}
+
+.remove {
+    margin-right: 5px;
 }
 
 .answer-button {
