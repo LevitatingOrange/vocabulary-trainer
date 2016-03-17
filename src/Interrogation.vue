@@ -16,12 +16,12 @@
 	</div>
 	<div class="content" v-else>
 	    <div class="language">
-		{{ reverse ? nativeLang : otherLang }}
+		{{ reverse ? nativeLanguage : otherLanguage }}
 		<i class="ion-arrow-right-c"></i>
-		{{ reverse ? otherLang : nativeLang }}
+		{{ reverse ? otherLanguage : nativeLanguage }}
 	    </div>
 	    <div class="from">
-		{{ reverse ? currentWord.nativeWord : currentWord.otherWord }}
+		{{ reverse ? currentWord.native : currentWord.other }}
 	    </div>
 	    <div class="to">
 		<form @submit.prevent="checkInput">
@@ -44,8 +44,8 @@
 
      props: {
 	 words: Array,
-	 nativeLang: String,
-	 otherLang: String,
+	 nativeLanguage: String,
+	 otherLanguage: String,
 	 total: Number
      },
 
@@ -66,7 +66,7 @@
      methods: {
 	 checkInput: function (event) {
 	     this.counter = this.counter + 1;
-	     const other = this.reverse ? this.currentWord.otherWord : this.currentWord.nativeWord;
+	     const other = this.reverse ? this.currentWord.other : this.currentWord.native;
 	     if (this.currentInput === other) {
 		 this.counterCorrect = this.counterCorrect + 1;
 	     }
@@ -83,7 +83,7 @@
 	     }
 	 },
 	 goBack: function() {
-	     this.$dispatch("interrogationBack");
+	     this.$dispatch("back");
 	 }
       }
  }
@@ -122,6 +122,7 @@
  .to-input {
      width: 150px;
      text-align: center;
+     font-size: 20px;
  }
 
  /*

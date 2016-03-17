@@ -5,12 +5,12 @@
 		Select
 	    </div>
 	    <div class="header-info">
-		{{ native }}
+		{{ nativeLanguage }}
 	    </div>
 	</div>
 	<div class="content">
 	    <ul class="languages">
-		<li v-for="language in languages">
+		<li v-for="language in otherLanguages">
 		    <form class="change-language" @submit.prevent="selectLanguage($index)">
 			<button type="button" class="remove" @click="removeLanguage($index)"> 
 			    <i class="ion-close"></i>
@@ -26,7 +26,7 @@
 	<div class="footer-bar">
 	    <form class="edit-language" @submit.prevent="addLanguage">
 		<input type="text" v-model="newLanguage"/>
-		<button class="select" type="submit">
+		<button class="add" type="submit">
 		    <i class="ion-plus"></i>
 		</button>
 	    </form>
@@ -39,21 +39,21 @@
      name: "LanguagesView",
 
      props: {
-	 native: String,
-	 languages: [],
+	 nativeLanguage: String,
+	 otherLanguages: [],
 	 newLanguage: ""
      },
 
      methods: {
 	 selectLanguage: function(index) {
-	     this.$dispatch("select-language", index);
+	     this.$dispatch("language-selected", index);
 	 },
 	 addLanguage: function() {
-	     this.languages.push(this.newLanguage);
+	     this.otherLanguages.push(this.newLanguage);
 	     this.newLanguage = "";
 	 },
 	 removeLanguage: function(index) {
-	     this.languages.splice(index, 1);
+	     this.otherLanguages.splice(index, 1);
 	 }
      }
  }

@@ -5,8 +5,10 @@
 	<!--
 	<native-view></native-view>
 	<interrogation :words.once="words" native-lang="German" other-lang="English" :total="10"></interrogation>
+	<languages-view :other-languages.sync="['english', 'italian']" native-language="German"></languages-view>
 	-->
-	<languages-view :languages.sync="['english', 'italian']" native="German"></languages-view>
+	<vocabulary-view :words="words" other-language="Italian" native-language="German">
+	</vocabulary-view>
     </div>
 </template>
 
@@ -14,36 +16,38 @@
  import Interrogation from "./Interrogation.vue";
  import NativeView from "./NativeView.vue";
  import LanguagesView from "./LanguagesView.vue";
+ import VocabularyView from "./VocabularyView.vue";
  
  export default {
      components: {
 	 Interrogation,
 	 NativeView,
-	 LanguagesView
+	 LanguagesView,
+	 VocabularyView
      },
      
      data () {
 	 return {
 	     words: [
 		 {
-		     nativeWord: "Haus",
-		     otherWord: "house",
+		     native: "Haus",
+		     other: "house",
 		 },
 		 {
-		     nativeWord: "Straße",
-		     otherWord: "street",
+		     native: "Straße",
+		     other: "street",
 		 },
 		 {
-		     nativeWord: "Wohnung",
-		     otherWord: "flat",
+		     native: "Wohnung",
+		     other: "flat",
 		 },
 		 {
-		     nativeWord: "leben",
-		     otherWord: "live",
+		     native: "leben",
+		     other: "live",
 		 },
 		 {
-		     nativeWord: "Schlafen",
-		     otherWord: "sleep",
+		     native: "Schlafen",
+		     other: "sleep",
 		 }
 	     ]
 	 }

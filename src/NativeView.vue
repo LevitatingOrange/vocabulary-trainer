@@ -28,7 +28,7 @@
      },
      methods: {
 	 submitLanguage: function (event) {
-	     this.$dispatch("nativeCreated", this.currentInput);
+	     this.$dispatch("native-created", this.currentInput);
 	 }
      }
  }
