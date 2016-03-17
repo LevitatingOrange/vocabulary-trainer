@@ -15,7 +15,7 @@
 		<form class="change-language" @submit.prevent="selectLanguage($index)">
 		    <input type="text" v-model="language"/>
 		    <button class="select" type="submit">
-			<i class="fa fa-angle-right fa-lg"></i>
+			<i class="ion-chevron-right"></i>
 		    </button>
 		</form>
 	    </li>
@@ -25,7 +25,7 @@
 	<form class="edit-language" @submit.prevent="newLanguage">
 	    <input type="text" v-model="newLanguageInput"/>
 	    <button class="select" type="submit">
-		<i class="fa fa-plus fa-lg"></i>
+		<i class="ion-plus"></i>
 	    </button>
 	</form>
     </div>

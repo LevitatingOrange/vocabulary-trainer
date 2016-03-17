@@ -17,7 +17,7 @@
 	<div class="content" v-else>
 	    <div class="language">
 		{{ reverse ? nativeLang : otherLang }}
-		<i class="fa fa-angle-double-right"></i>
+		<i class="ion-arrow-right-c"></i>
 		{{ reverse ? otherLang : nativeLang }}
 	    </div>
 	    <div class="from">
@@ -25,15 +25,15 @@
 	    </div>
 	    <div class="to">
 		<form @submit.prevent="checkInput">
-		    <i class="fa fa-angle-right fa-lg"></i>
+		    <i class="ion-chevron-right"></i>
 		    <input class="to-input" type="text" v-model="currentInput" autofocus/>
-		    <i class="fa fa-angle-left fa-lg"></i>
+		    <i class="ion-chevron-left"></i>
 		    <button class="answer-button" type="submit"></button>
 		</form>
 	    </div>
 	</div>
 	<div class="footer-bar">
-	    <button @click="goBack" class="back"><i class="fa fa-angle-left"></i> Back</button>
+	    <button @click="goBack" class="back"><i class="ion-chevron-left"></i> Back</button>
 	</div>
     </div>
 </template>
@@ -123,10 +123,12 @@
      width: 150px;
      text-align: center;
  }
- 
+
+ /*
  .to-input:focus {
      border-bottom: solid;
      border-width: 0.5px;
      border-color: #A0A0A0;
  }
+ */
 </style>
