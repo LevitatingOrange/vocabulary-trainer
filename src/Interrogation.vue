@@ -26,7 +26,7 @@
 	    <div class="to">
 		<form @submit.prevent="checkInput">
 		    <i class="ion-chevron-right"></i>
-		    <input class="to-input" type="text" v-model="currentInput" autofocus/>
+		    <input class="to-input" type="text" v-model="currentInput"/>
 		    <i class="ion-chevron-left"></i>
 		    <button class="answer-button" type="submit"></button>
 		</form>
@@ -43,16 +43,13 @@
      name: "Interrogation",
 
      props: {
+	 shown: Boolean,
 	 words: Array,
 	 nativeLanguage: String,
 	 otherLanguage: String,
 	 total: Number
      },
 
-     created () {
-	 this.selectNewWord();
-     },
-     
      data () {
 	 return {
 	     reverse: false,
@@ -85,7 +82,14 @@
 	 goBack: function() {
 	     this.$dispatch("back");
 	 }
-      }
+     },
+     watch: {
+	 shown: function(oldVal, newVal) {
+	     if (newVal && !oldVal) {
+		 this.selectNewWord();
+	     }
+	 }
+     }
  }
 </script>
 
@@ -122,7 +126,7 @@
  .to-input {
      width: 150px;
      text-align: center;
-     font-size: 20px;
+     font-size: 25px;
  }
 
  /*

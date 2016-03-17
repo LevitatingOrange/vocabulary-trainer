@@ -2,13 +2,15 @@
     <div class="view">
 	<div class="header-bar">
 	    <div class="header-label">
-		Select
+		New native
 	    </div>
 	</div>
 	<div class="content">
 	    <form @submit.prevent="submitLanguage">
 		<input type="text" v-model="currentInput" autofocus/>
-		<button class="answer-button" type="submit"></button>
+		<button type="submit">
+		    <i class="ion-chevron-right"></i>
+		</button>
 	    </form>
 	</div>
 	<div class="footer-bar">
@@ -19,7 +21,11 @@
 
 <script>
  export default {
-     name: "NativeView",
+     name: "Native",
+
+     props: {
+	 shown: Boolean
+     },
 
      data () {
 	 return {
@@ -30,6 +36,6 @@
 	 submitLanguage: function (event) {
 	     this.$dispatch("native-created", this.currentInput);
 	 }
-     }
+     },
  }
 </script>

@@ -64,6 +64,7 @@ body {
 
 .content {
     padding: 5px;
+    width: 300px;
 }
 
 input {
@@ -93,6 +94,11 @@ button {
     margin-right: 5px;
 }
 
-.answer-button {
-    display: none;
+form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: inherit;
 }

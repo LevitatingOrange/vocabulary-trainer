@@ -63,13 +63,14 @@
 	</div>
     </div>
 </template>
-
+ 
 <script>
  
  export default {
      name: "VocabularyView",
 
      props: {
+	 shown: Boolean,
 	 nativeLanguage: String,
 	 otherLanguage: String,
 	 words: Array
