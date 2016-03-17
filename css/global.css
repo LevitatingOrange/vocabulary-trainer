@@ -1,0 +1,91 @@
+/* Global css definitions */
+
+/* body should fill the whole page without scrollbars */
+body, html {
+    font-family: "Lato", sans-serif;
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+/* center the app */
+body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.view {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-bar {
+    margin-bottom: 5px;
+    border-bottom: solid;
+}
+
+.header-label {
+    height: 30px;
+    line-height: 30px;
+    font-size: 30px;
+}
+
+.header-info {
+    
+}
+
+.footer-bar {
+    margin-top: 5px;
+    border-top: solid;
+}
+
+.header-bar, .footer-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-direction: row;
+    width: 300px;
+    padding: 5px;
+    border-width: 0.5px;
+    border-color: #A0A0A0;
+    font-weight: 300;
+}
+
+input {
+    outline: none;
+    border: none;
+    font-style: italic;
+    font-size: 25px;
+    font-weight: 300;
+    width: 100%;
+    height: 30px;    
+}
+input:focus {
+    outline: none;
+}
+
+.back, .select, .remove {
+    font-weight: 300;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+
+.answer-button {
+    display: none;
+}
