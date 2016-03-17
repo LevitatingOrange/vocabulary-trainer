@@ -46,7 +46,11 @@
 	 otherLanguages: [],
 	 newLanguage: ""
      },
-
+     
+     ready () {
+	 this.$els.firstInput.focus();
+     },
+     
      methods: {
 	 selectLanguage: function(index) {
 	     this.$dispatch("language-selected", index);
@@ -58,13 +62,6 @@
 	 },
 	 removeLanguage: function(index) {
 	     this.otherLanguages.splice(index, 1);
-	 }
-     },
-     watch: {
-	 shown: function(newVal, oldVal) {
-	     if (newVal && !oldVal) {
-		 this.$els.firstInput.focus();
-	     }
 	 }
      }
  }

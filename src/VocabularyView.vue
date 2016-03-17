@@ -86,7 +86,11 @@
 	     newOther: "",
 	 }
      },
-
+     
+     ready () {
+	 this.$els.firstInput.focus();
+     },
+     
      methods: {
 	 changeSortOrder: function(key) {
 	     this.sortKey = key;
@@ -117,14 +121,6 @@
 	     this.$els.firstInput.focus();
 	 }
      },
-     
-     watch: {
-	 shown: function(newVal, oldVal) {
-	     if (newVal && !oldVal) {
-		 this.$els.firstInput.focus();
-	     }
-	 }
-     }
  }
 </script>
 

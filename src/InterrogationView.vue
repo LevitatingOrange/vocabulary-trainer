@@ -5,13 +5,13 @@
 		{{ finished ? "Result" : "Translate" }}
 	    </div>
 	    <div v-if="!finished" class="header-info">
-		<span class="counter-correct">{{ counterCorrect }}</span>/{{ counter }}/<span class="counter-total">{{ total }}</span>
+		<span class="correct">{{ counterCorrect }}</span>/{{ counter }}/<span class="counter-total">{{ total }}</span>
 	    </div>
 	</div>
 	<div class="content" v-show="finished">
 	    <div class="final-counter">
-		<span class="final-correct">{{ counterCorrect }}</span> :
-		<span class="final-wrong">{{ counter - counterCorrect}}</span>
+		<span class="correct">{{ counterCorrect }}</span> :
+		<span class="wrong">{{ counter - counterCorrect}}</span>
 	    </div>
 	</div>
 	<div class="content" v-else>
@@ -34,13 +34,17 @@
 	</div>
 	<div class="footer-bar">
 	    <button @click="goBack" class="back"><i class="ion-chevron-left"></i> Back</button>
+	    <div v-show="showLastResult" class="last-result" transition="fade">
+		<i v-show="lastResult" class="ion-checkmark-circled correct"></i>
+		<i v-else class="ion-close-circled wrong"></i>
+	    </div>
 	</div>
     </div>
 </template>
 
 <script>
  export default {
-     name: "Interrogation",
+     name: "InterrogationView",
 
      props: {
 	 shown: Boolean,
@@ -57,9 +61,17 @@
 	     currentInput: "",
 	     counter: 0,
 	     counterCorrect: 0,
-	     finished: false
+	     finished: false,
+	     lastResult: false,
+	     showLastResult: false
 	 }
      },
+
+     ready () {
+	 this.$els.firstInput.focus();
+	 this.selectNewWord();
+     },
+     
      methods: {
 	 reset: function() {
 	     this.reverse = false;
@@ -74,15 +86,20 @@
 	     const other = this.reverse ? this.currentWord.other : this.currentWord.native;
 	     if (this.currentInput === other) {
 		 this.counterCorrect = this.counterCorrect + 1;
+		 this.lastResult = true;
+	     } else {
+		 this.lastResult = false;
 	     }
 	     this.selectNewWord();
 	     this.$els.firstInput.focus();
+	     this.showLastResult = true;
+	     setTimeout(_ => this.showLastResult = false, 500);
 	 },
 	 selectNewWord: function() {
 	     if (this.counter >= this.total) {
 		 this.finished = true;
-	     } else { 
-		 const newIndex = Math.floor(Math.random() * this.words.length);
+	     } else {
+		 const newIndex = this.words.length == 1 ? 0 : Math.floor(Math.random() * this.words.length);
 		 this.reverse = Math.random() > 0.5 ? true : false;
 		 this.currentWord = this.words[newIndex];
 		 this.currentInput = "";
@@ -92,19 +109,17 @@
 	     this.$dispatch("back");
 	 }
      },
-     watch: {
-	 shown: function(newVal, oldVal) {
-	     if (newVal && !oldVal) {
-		 this.reset();
-		 this.selectNewWord();
-		 this.$els.firstInput.focus();
-	     }
-	 }
-     }
  }
 </script>
 
 <style>
+ .fade-transition {
+     transition: opacity .5s ease;
+ }
+ .fade-enter, .fade-leave {
+     opacity: 0;
+ }
+ 
  .from {
      font-size: 30px;
      font-weight: 700;
@@ -117,20 +132,16 @@
      font-weight: 300;
  }
 
- .counter-correct {
-     color: #43CE43;
- }
-
  .final-counter {
      font-size: 30px;
      font-weight: 300;
  }
 
- .final-correct {
+ .correct {
      color: #43CE43;
  }
  
- .final-wrong {
+ .wrong {
      color: #BD1E1E;
  }
 

@@ -23,32 +23,18 @@
  export default {
      name: "Native",
 
-     props: {
-	 shown: Boolean
-     },
-
      data () {
 	 return {
 	     currentInput: "",
 	 }
      },
-     created () {
-	 this.$nextTick(function () {
-	     this.$els.firstInput.focus();
-	 });
+     ready () {
+	 this.$els.firstInput.focus();
      },
      methods: {
 	 submitLanguage: function (event) {
 	     this.$dispatch("native-created", this.currentInput);
 	 }
      },
-     watch: {
-	 shown: function(newVal, oldVal) {
-	     if (newVal && !oldVal) {
-		 this.selectNewWord();
-		 this.$els.firstInput.focus();
-	     }
-	 }
-     }
  }
 </script>

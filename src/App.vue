@@ -2,39 +2,27 @@
 
 <template>
     <div id="app">
-	<native-view v-show="currentView == 0"
-		     :shown="currentView == 0">
-	</native-view>
-	<languages-view v-show="currentView == 1"
-			:other-languages.sync="otherLanguages"
-			:native-language="nativeLanguage"
-			:shown="currentView == 1">
-	</languages-view>
-	<vocabulary-view v-show="currentView == 2"
-			 :words="words[selectedLanguage]"
-			 :other-language="selectedLanguage"
-			 :native-language="nativeLanguage"
-			 :shown="currentView == 2">
-	</vocabulary-view>
-	<interrogation v-show="currentView == 3"
-		       :words="words[selectedLanguage]"
-		       :native-language="nativeLanguage"
-		       :other-language="selectedLanguage"
-		       :total="10"
-		       :shown="currentView == 3">
-	</interrogation>
+	<component :is="currentView"
+		   :other-languages.sync="otherLanguages"
+		   :native-language="nativeLanguage"
+		   :other-language="selectedLanguage"
+		   :total="10"
+		   :words="words[selectedLanguage]"
+		   transition="swipe"
+		   transition-mode="out-in">
+	</component>
     </div>
 </template>
 
 <script>
- import Interrogation from "./Interrogation.vue";
+ import InterrogationView from "./InterrogationView.vue";
  import NativeView from "./NativeView.vue";
  import LanguagesView from "./LanguagesView.vue";
  import VocabularyView from "./VocabularyView.vue";
  
  export default {
      components: {
-	 Interrogation,
+	 InterrogationView,
 	 NativeView,
 	 LanguagesView,
 	 VocabularyView
@@ -42,7 +30,7 @@
      
      data () {
 	 return {
-	     currentView: 0,
+	     currentView: "NativeView",
 	     nativeLanguage: "",
 	     selectedLanguage: "",
 	     otherLanguages: [],
@@ -52,22 +40,40 @@
      events: {
 	 "native-created": function (nativeLanguage) {
 	     this.nativeLanguage = nativeLanguage;
-	     this.currentView = 1;
+	     this.currentView = "LanguagesView";
 	 },
 	 "language-selected": function (language) {
 	     this.selectedLanguage = this.otherLanguages[language];
-	     if (this.words[this.selectedLanguage] === undefined) {
-		 this.words[this.selectedLanguage] = [];
-	     }
-	     this.currentView = 2;
- },
-	 "back": function () {
-	     this.currentView = this.currentView - 1;
+	     this.currentView = "VocabularyView";
 	 },
 	 "interrogate": function () {
-	     this.currentView = 3;
+	     this.currentView = "InterrogationView";
 	     this.$broadcast("start-interrogation");
+	 },
+	 "back": function () {
+	     if (this.currentView === "VocabularyView") {
+		 this.currentView = "LanguagesView";
+	     } else {
+		 this.currentView = "VocabularyView";
+	     }
+	 }
+     },
+     watch: {
+	 otherLanguages: function(newVal, oldVal) {
+	     const lastElem = this.otherLanguages.slice(-1).pop();
+	     if (this.words[lastElem] === undefined) {
+		 this.words[lastElem] = [];
+	     }
 	 }
      }
  }
 </script>
+
+<style>
+ .swipe-transition {
+     transition: opacity 0.2s ease;
+ }
+ .swipe-enter, .swipe-leave {
+     opacity: 0;
+ }
+</style>
