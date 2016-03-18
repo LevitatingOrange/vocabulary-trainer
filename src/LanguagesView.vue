@@ -10,11 +10,12 @@
 	</div>
 	<div class="content">
 	    <ul class="languages">
-		<li v-for="language in otherLanguages">
-		    <form class="change-language" @submit.prevent="selectLanguage($index)">
-			<button class="remove" type="button" @click="removeLanguage($index)"> 
+		<li v-for="language in languages">
+		    <form class="change-language" @submit.prevent="selectLanguage($key)">
+			<button class="remove" type="button" @click="removeLanguage($key)"> 
 			    <i class="ion-close"></i>
 			</button>
+			{{ language }}
 			<input type="text" v-model="language"/>
 			<button type="submit">
 			    <i class="ion-chevron-right"></i>
@@ -34,17 +35,24 @@
 	<div class="footer-bar">
 	</div>
     </div>
-</template>
+</template> 
 
 <script>
+ import {generateUUID} from "./helpers.js";
+ 
  export default {
      name: "LanguagesView",
 
      props: {
 	 shown: Boolean,
 	 nativeLanguage: String,
-	 otherLanguages: [],
-	 newLanguage: ""
+	 languages: Object,
+     },
+
+     data () {
+	 return {
+	     newLanguage: ""
+	 };
      },
      
      ready () {
@@ -52,16 +60,19 @@
      },
      
      methods: {
-	 selectLanguage: function(index) {
-	     this.$dispatch("language-selected", index);
+	 selectLanguage: function(key) {
+	     this.$dispatch("language-selected", key);
 	 },
 	 addLanguage: function() {
-	     this.otherLanguages.push(this.newLanguage);
+	     const uuid = generateUUID();
+	     this.languages[uuid] = this.newLanguage;
 	     this.newLanguage = "";
 	     this.$els.firstInput.focus();
+	     this.$dispatch("language-added", uuid);
 	 },
-	 removeLanguage: function(index) {
-	     this.otherLanguages.splice(index, 1);
+	 removeLanguage: function(key) {
+	     delete this.languages[key];
+	     this.$dispatch("language-removed", uuid);
 	 }
      }
  }

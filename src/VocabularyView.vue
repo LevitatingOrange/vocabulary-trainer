@@ -25,7 +25,7 @@
 			</tr>
 		    </thead>
 		    <tbody>
-			<tr class="word" v-for="word in words | orderBy sortKey sortOrder">
+			<tr class="word" v-for="word in otherLanguage.words | orderBy sortKey sortOrder">
 			    <td>
 				<input class="word-input" v-model="word.native"/>
 			    </td>
@@ -72,8 +72,7 @@
      props: {
 	 shown: Boolean,
 	 nativeLanguage: String,
-	 otherLanguage: String,
-	 words: Array
+	 otherLanguage: Object,
      },
 
      data() {
@@ -109,10 +108,10 @@
 	     this.$dispatch("interrogate");
 	 },
 	 removeWord: function(word) {
-	     this.words.$remove(word);
+	     this.otherLanguage.words.$remove(word);
 	 },
 	 newWord: function() {
-	     this.words.push({
+	     this.otherLanguage.words.push({
 		 native: this.newNative,
 		 other: this.newOther
 	     });

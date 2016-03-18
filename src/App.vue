@@ -3,11 +3,10 @@
 <template>
     <div id="app">
 	<component :is="currentView"
-		   :other-languages.sync="otherLanguages"
 		   :native-language="nativeLanguage"
-		   :other-language="selectedLanguage"
 		   :total="10"
-		   :words="words[selectedLanguage]"
+		   :languages.sync="languages"
+		   :other-language="languages[selectedLanguage]"
 		   transition="swipe"
 		   transition-mode="out-in">
 	</component>
@@ -32,19 +31,20 @@
 	 return {
 	     currentView: "NativeView",
 	     nativeLanguage: "",
+	     words: {},
+	     languages: {},
 	     selectedLanguage: "",
-	     otherLanguages: [],
-	     words: {}
 	 }
      },
+
      events: {
 	 "native-created": function (nativeLanguage) {
 	     this.nativeLanguage = nativeLanguage;
 	     this.currentView = "LanguagesView";
 	 },
-	 "language-selected": function (language) {
-	     this.selectedLanguage = this.otherLanguages[language];
-	     this.currentView = "VocabularyView";
+
+	 "language-selected": function (key) {
+	     this.selectedLanguage = key;
 	 },
 	 "interrogate": function () {
 	     this.currentView = "InterrogationView";
