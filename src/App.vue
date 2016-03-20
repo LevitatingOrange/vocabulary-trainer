@@ -1,79 +1,71 @@
-
-
 <template>
     <div id="app">
-	<component :is="currentView"
-		   :native-language="nativeLanguage"
-		   :total="10"
-		   :languages.sync="languages"
-		   :other-language="languages[selectedLanguage]"
-		   transition="swipe"
-		   transition-mode="out-in">
+	<component :is="currentView" :data="data">
 	</component>
     </div>
 </template>
 
 <script>
- import InterrogationView from "./InterrogationView.vue";
- import NativeView from "./NativeView.vue";
- import LanguagesView from "./LanguagesView.vue";
- import VocabularyView from "./VocabularyView.vue";
- 
- export default {
-     components: {
-	 InterrogationView,
-	 NativeView,
-	 LanguagesView,
-	 VocabularyView
-     },
+    import Native from "./Native.vue";
+    import Languages from "./Languages.vue";
+    import Vocabulary from "./Vocabulary.vue";
+    
+    export default {
+        components: {
+            Native,
+            Languages
+        },
      
-     data () {
-	 return {
-	     currentView: "NativeView",
-	     nativeLanguage: "",
-	     words: {},
-	     languages: {},
-	     selectedLanguage: "",
-	 }
-     },
-
-     events: {
-	 "native-created": function (nativeLanguage) {
-	     this.nativeLanguage = nativeLanguage;
-	     this.currentView = "LanguagesView";
-	 },
-
-	 "language-selected": function (key) {
-	     this.selectedLanguage = key;
-	 },
-	 "interrogate": function () {
-	     this.currentView = "InterrogationView";
-	     this.$broadcast("start-interrogation");
-	 },
-	 "back": function () {
-	     if (this.currentView === "VocabularyView") {
-		 this.currentView = "LanguagesView";
-	     } else {
-		 this.currentView = "VocabularyView";
-	     }
-	 }
-     },
-     watch: {
-	 otherLanguages: function(newVal, oldVal) {
-	     const lastElem = this.otherLanguages.slice(-1).pop();
-	     if (this.words[lastElem] === undefined) {
-		 this.words[lastElem] = [];
-	     }
-	 }
-     }
- }
+        data () {
+            return {
+                currentView: "Native",
+                data: {
+                    native: "",
+                    selectedLanguage: 0,
+                    languages: [],
+                    words: []
+                },
+            }
+        },
+        events: {
+            "next": function() {
+                switch (this.currentView) {
+                    case "Native":
+                        this.currentView = "Languages";
+                        break;
+                    case "Languages":
+                        this.currentView = "Vocabulary";
+                        break;
+                    default:
+                        break;
+                }
+            },
+            "back": function() {
+                switch (this.currentView) {
+                    case "Native":
+                        this.currentView = "Languages";
+                        break;
+                    case "Languages":
+                        this.currentView = "Vocabulary";
+                        break;
+                    default:
+                        break;
+                }
+                if (this.currentView == "Languages") {
+                    this.currentView = "Native";
+                } else {
+                    this.currentView = "Languages";
+                }
+            }
+        }
+    }
 </script>
 
 <style>
- .swipe-transition {
-     transition: opacity 0.2s ease;
- }
- .swipe-enter, .swipe-leave {
-     opacity: 0;
- }
+    .swipe-transition {
+        transition: opacity 0.2s ease;
+    }
+    .swipe-enter, .swipe-leave {
+        opacity: 0;
+    }
 </style>
