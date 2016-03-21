@@ -81,8 +81,4 @@
     .select-button {
         margin-right: 5px;
     }
-    
-    .not-selected {
-        color: #999999;
-    }
 </style>

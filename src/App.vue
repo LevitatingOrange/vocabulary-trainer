@@ -13,7 +13,8 @@
     export default {
         components: {
             Native,
-            Languages
+            Languages,
+            Vocabulary
         },
      
         data () {
@@ -42,19 +43,14 @@
             },
             "back": function() {
                 switch (this.currentView) {
-                    case "Native":
-                        this.currentView = "Languages";
-                        break;
                     case "Languages":
-                        this.currentView = "Vocabulary";
+                        this.currentView = "Native";
+                        break;
+                    case "Vocabulary":
+                        this.currentView = "Languages";
                         break;
                     default:
                         break;
-                }
-                if (this.currentView == "Languages") {
-                    this.currentView = "Native";
-                } else {
-                    this.currentView = "Languages";
                 }
             }
         }

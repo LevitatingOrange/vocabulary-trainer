@@ -12,9 +12,13 @@
             <slot name="content"></slot>
 	    </div>
 	    <div class="footer-bar">
-            <button @click="this.$dispatch('back')"><i class="ion-chevron-left"></i> Back</button>
+            <slot name="left-footer">
+                <button @click="this.$dispatch('back')"><i class="ion-chevron-left"></i> Back</button>
+            </slot>
             <slot name="footer"></slot>
-            <button @click="this.$dispatch('next')">Next <i class="ion-chevron-right"></i></button>
+            <slot name="right-footer">
+                <button @click="this.$dispatch('next')">Next <i class="ion-chevron-right"></i></button>
+            </slot>
 	    </div>
     </div>
 </template>

@@ -2,7 +2,7 @@
 <div>
     <view>
         <div slot="label">
-            Create native
+            Native
         </div>
         <div slot="content">
             <form class="full-form" @submit.prevent="this.$dispatch('next')">
@@ -10,6 +10,7 @@
                 <button type="submit"><i class="ion-checkmark"></i></button>
             </form>
         </div>
+        <div slot="left-footer"></div>
     </view>
 </div>
 </template>
