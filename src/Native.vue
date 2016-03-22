@@ -1,4 +1,13 @@
+<style>
+
+.full-form {
+    width: 300px;
+}
+
+</style>
+
 <template>
+
 <div>
     <view>
         <div slot="label">
@@ -12,41 +21,38 @@
         </div>
         <div slot="left-footer"></div>
         <div slot="right-footer">
-          <button @click="next">Next <i class="ion-chevron-right"></i></button>
+            <button @click="next">Next <i class="ion-chevron-right"></i></button>
         </div>
     </view>
 </div>
+
 </template>
 
 <script>
-    import View from "./View.vue";
-    export default {
-        name: "Native",
-        components: {
-            View
-        },
 
-        props: {
-            data: Object
-        },
+import View from "./View.vue";
+export default {
+    name: "Native",
+    components: {
+        View
+    },
 
-        ready () {
-            this.$els.input.focus();
-        },
-        methods: {
-          next: function() {
+    props: {
+        data: Object
+    },
+
+    ready() {
+        this.$els.input.focus();
+    },
+    methods: {
+        next: function() {
             if (!this.data.native || /^\s*$/.test(this.data.native)) {
-              this.$dispatch('error');
+                this.$dispatch('error');
             } else {
-              this.$dispatch('next');
+                this.$dispatch('next');
             }
-          }
         }
     }
-</script>
+}
 
-<style>
-    .full-form {
-        width: 300px;
-    }
-</style>
+</script>

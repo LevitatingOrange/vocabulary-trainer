@@ -1,8 +1,8 @@
-* Language select remove Button
-* Proper input validation on all inputs in NativeView, LangView and VocbularyView
-* remove button does not look that good, change this
+* Finished – Language select remove Button
+* Finished – Proper input validation on all inputs in NativeView, LangView and VocbularyView
+* Finished – remove button does not look that good, change this
 * change props to be required
 * add uids
-* also remove all words if language gets removed
+* Finished – also remove all words if language gets removed
 * strip whitespace from inputs
-* handle empty word list interrogation
+* handle empty word list interrogation, empty languages list also

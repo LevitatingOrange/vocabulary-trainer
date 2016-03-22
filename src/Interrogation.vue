@@ -1,3 +1,51 @@
+<style>
+
+.fade-transition {
+    transition: opacity .5s ease;
+}
+
+.fade-enter,
+.fade-leave {
+    opacity: 0;
+}
+
+.from {
+    font-size: 30px;
+    font-weight: 700;
+    font-style: italic;
+    margin: 5px;
+}
+
+.language {
+    margin-top: 5px;
+    font-weight: 300;
+}
+
+.final-counter {
+    font-size: 30px;
+    font-weight: 300;
+}
+
+.correct {
+    color: #43CE43;
+}
+
+.wrong {
+    color: #BD1E1E;
+}
+
+.to-input {
+    width: 150px;
+    text-align: center;
+    font-size: 25px;
+}
+
+.last-result i {
+    width: 50px;
+}
+
+</style>
+
 <template>
 
 <div>
@@ -6,7 +54,7 @@
             Interrogation
         </div>
         <div v-show="!finished" slot="info">
-          <span class="correct">{{ counterCorrect }}</span>/{{ counter }}/<span class="counter-total">{{ total }}</span>
+            <span class="correct">{{ counterCorrect }}</span>/{{ counter }}/<span class="counter-total">{{ total }}</span>
         </div>
         <div slot="content" v-show="finished" class="content">
             <div class="final-counter">
@@ -109,51 +157,3 @@ export default {
 }
 
 </script>
-
-<style>
-
-.fade-transition {
-    transition: opacity .5s ease;
-}
-
-.fade-enter,
-.fade-leave {
-    opacity: 0;
-}
-
-.from {
-    font-size: 30px;
-    font-weight: 700;
-    font-style: italic;
-    margin: 5px;
-}
-
-.language {
-    margin-top: 5px;
-    font-weight: 300;
-}
-
-.final-counter {
-    font-size: 30px;
-    font-weight: 300;
-}
-
-.correct {
-    color: #43CE43;
-}
-
-.wrong {
-    color: #BD1E1E;
-}
-
-.to-input {
-    width: 150px;
-    text-align: center;
-    font-size: 25px;
-}
-
-.last-result i {
-    width: 50px;
-}
-
-</style>
