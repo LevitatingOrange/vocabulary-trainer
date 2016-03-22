@@ -36,27 +36,31 @@
         components: {
             View
         },
-        
+
         props: {
             data: Object,
         },
-        
+
         data () {
             return {
                 newLanguage: "",
             };
         },
-        
+
         ready () {
             this.$els.input.focus();
         },
-        
+
         methods: {
             addLanguage: function() {
+              if (!this.newLanguage || /^\s*$/.test(this.newLanguage)) {
+                this.$dispatch('error');
+              } else {
                 this.data.languages.push(this.newLanguage);
                 this.data.words.push([]);
                 this.data.selectedLanguage = this.data.languages.length - 1;
                 this.newLanguage = "";
+              }
             },
             removeLanguage: function(index) {
                 this.data.languages.splice(index, 1);
@@ -77,7 +81,7 @@
         margin: 0;
         width: 300px;
     }
-    
+
     .select-button {
         margin-right: 5px;
     }

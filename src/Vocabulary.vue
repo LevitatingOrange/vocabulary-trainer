@@ -104,11 +104,16 @@
                 this.data.words[this.data.selectedLanguage].$remove(word);
             },
             addWord: function() {
-                this.data.words[this.data.selectedLanguage].push({native: this.newNative, 
+              if (!this.newOther || /^\s*$/.test(this.newOther) ||
+                  !this.newNative || /^\s*$/.test(this.newNative)) {
+                this.$dispatch('error');
+              } else {
+                this.data.words[this.data.selectedLanguage].push({native: this.newNative,
                                                              other: this.newOther});
                 this.newNative = "";
                 this.newOther = "";
                 this.$els.input.focus();
+              }
             }
         }
     }
@@ -128,7 +133,7 @@
         font-size: 14px;
         height: inherit;
     }
-    
+
     .word-input:placeholder-shown {
         font-style: italic;
     }

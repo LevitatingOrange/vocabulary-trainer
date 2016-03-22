@@ -3,8 +3,9 @@
       <component :is="currentView"
                  :data="data"
                  :total="5"
-                 transition="swipe"
-                 transition-mode="out-in">
+                 :transition="back == true? 'swipe-back':'swipe'"
+                 transition-mode="out-in"
+                 :class="{'error': error}">
       </component>
     </div>
 </template>
@@ -32,10 +33,17 @@
                     languages: [],
                     words: []
                 },
+                back: false,
+                error: false
             }
         },
         events: {
+            "error": function() {
+              this.error = true;
+              setTimeout(_ => this.error = false, 450);
+            },
             "next": function() {
+                this.back = false;
                 switch (this.currentView) {
                     case "Native":
                         this.currentView = "Languages";
@@ -51,6 +59,7 @@
                 }
             },
             "back": function() {
+                this.back = true;
                 switch (this.currentView) {
                     case "Languages":
                         this.currentView = "Native";
@@ -80,5 +89,38 @@
     .swipe-leave {
         opacity: 0;
         transform: translateX(400px);
+    }
+    .swipe-back-transition {
+        transition: all 0.2s ease;
+    }
+    .swipe-back-enter {
+        opacity: 0;
+        transform: translateX(400px);
+    }
+    .swipe-back-leave {
+        opacity: 0;
+        transform: translateX(-400px);
+    }
+    /* Error animation */
+    .error {
+      animation-duration: 0.15s;
+      animation-iteration-count: 3;
+      animation-name: error;
+      animation-timing-function: linear;
+    }
+
+    @keyframes error {
+      from {
+        transform: translateX(0px);
+      }
+      25% {
+        transform: translateX(50px);
+      }
+      75% {
+        transform: translateX(-50px);
+      }
+      to {
+        transform: translateX(0px);
+      }
     }
 </style>
