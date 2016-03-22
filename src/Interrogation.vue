@@ -31,12 +31,9 @@
                 </form>
             </div>
         </div>
-        <div slot="footer" v-show="showLastResult" class="last-result" transition="fade">
+        <div slot="right-footer" v-show="showLastResult" class="last-result" transition="fade">
             <i v-show="lastResult" class="ion-checkmark-circled correct"></i>
             <i v-else class="ion-close-circled wrong"></i>
-        </div>
-        <div slot="right-footer" v-show="!finished">
-          <button @click="finish">Finish <i class="ion-close"></i></button>
         </div>
     </view>
 </div>
@@ -74,9 +71,6 @@ export default {
         this.selectNewWord();
     },
     methods: {
-        finish: function() {
-            this.finished = true;
-        },
         reset: function() {
             this.reverse = false;
             this.currentWord = {};
