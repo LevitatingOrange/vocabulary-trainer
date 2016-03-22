@@ -1,6 +1,10 @@
 <template>
     <div id="app">
-      <component :is="currentView" :data="data" :total="5">
+      <component :is="currentView"
+                 :data="data"
+                 :total="5"
+                 transition="swipe"
+                 transition-mode="out-in">
       </component>
     </div>
 </template>
@@ -67,9 +71,14 @@
 
 <style>
     .swipe-transition {
-        transition: opacity 0.2s ease;
+        transition: all 0.2s ease;
     }
-    .swipe-enter, .swipe-leave {
+    .swipe-enter {
         opacity: 0;
+        transform: translateX(-400px);
+    }
+    .swipe-leave {
+        opacity: 0;
+        transform: translateX(400px);
     }
 </style>

@@ -158,4 +158,8 @@ export default {
     font-size: 25px;
 }
 
+.last-result i {
+    width: 50px;
+}
+
 </style>
