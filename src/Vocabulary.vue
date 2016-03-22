@@ -4,15 +4,8 @@
             <div slot="label">
                 Vocabulary
             </div>
-            <!--
-            <div slot="info">
-                {{ data.native }}
-                <i class="ion-arrow-right-c"></i>
-                {{ data.languages[data.selectedLanguage] }}
-            </div>
-            -->
             <div slot="content">
-                <form>
+                <form @submit.prevent="addWord">
                     <table class="word-table">
                         <thead>
                             <tr>
@@ -47,8 +40,26 @@
                                 </td>
                             </tr>
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>
+				                    <input class="word-input" v-model="newNative" placeholder="new word" v-el:input/>
+			                    </td>
+                                <td>
+				                    <input class="word-input" v-model="newOther" placeholder="translation"/>
+                                </td>
+                                <td>
+                                    <button type="submit">
+                                        <i class="ion-checkmark"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </form>
+            </div>
+            <div slot="right-footer">
+                <button @click="this.$dispatch('next')">Interrogation <i class="ion-clipboard"></i></button>
             </div>
         </view>
     </div>
@@ -68,13 +79,15 @@
         },
 
         ready () {
-            //this.$els.input.focus();
+            this.$els.input.focus();
         },
 
         data() {
             return {
                 sortOrder: 1,
-                sortKey: "native"
+                sortKey: "native",
+                newNative: "",
+                newOther: ""
             };
         },
 
@@ -86,6 +99,16 @@
                 } else {
                     this.sortOrder = this.sortOrder * (-1);
                 }
+            },
+            removeWord: function(word) {
+                this.data.words[this.data.selectedLanguage].$remove(word);
+            },
+            addWord: function() {
+                this.data.words[this.data.selectedLanguage].push({native: this.newNative, 
+                                                             other: this.newOther});
+                this.newNative = "";
+                this.newOther = "";
+                this.$els.input.focus();
             }
         }
     }
@@ -104,5 +127,9 @@
         font-weight: 400;
         font-size: 14px;
         height: inherit;
+    }
+    
+    .word-input:placeholder-shown {
+        font-style: italic;
     }
 </style>

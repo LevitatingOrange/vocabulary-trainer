@@ -1,7 +1,7 @@
 <template>
     <div id="app">
-	<component :is="currentView" :data="data">
-	</component>
+      <component :is="currentView" :data="data" :total="5">
+      </component>
     </div>
 </template>
 
@@ -9,14 +9,16 @@
     import Native from "./Native.vue";
     import Languages from "./Languages.vue";
     import Vocabulary from "./Vocabulary.vue";
-    
+    import Interrogation from "./Interrogation.vue";
+
     export default {
         components: {
             Native,
             Languages,
-            Vocabulary
+            Vocabulary,
+            Interrogation
         },
-     
+
         data () {
             return {
                 currentView: "Native",
@@ -37,6 +39,9 @@
                     case "Languages":
                         this.currentView = "Vocabulary";
                         break;
+                    case "Vocabulary":
+                        this.currentView = "Interrogation";
+                        break;
                     default:
                         break;
                 }
@@ -48,6 +53,9 @@
                         break;
                     case "Vocabulary":
                         this.currentView = "Languages";
+                        break;
+                    case "Interrogation":
+                        this.currentView = "Vocabulary";
                         break;
                     default:
                         break;

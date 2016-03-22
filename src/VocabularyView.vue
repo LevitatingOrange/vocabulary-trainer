@@ -6,7 +6,6 @@
 	    </div>
 	</div>
 	<div class="content">
-	    <form @submit.prevent="newWord">
 		<table class="word-table">
 		    <thead>
 			<tr>
@@ -42,13 +41,13 @@
 		    <tfoot>
 			<tr class="word">
 			    <td>
-				<input class="word-input" v-model="newNative" placeholder="native" v-el:first-input/>
+				<input class="word-input" v-model="newNative" placeholder="native" @keyup.enter="newWord" v-el:first-input/>
 			    </td>
 			    <td>
-				<input class="word-input" v-model="newOther" placeholder="other"/>
+				<input class="word-input" v-model="newOther" placeholder="other" @keyup.enter="newWord"/>
 			    </td>
 			    <td>
-				<button type="submit">
+				<button type="button" @click="newWord">
 				    <i class="ion-plus"></i>
 				</button>
 			    </td>
