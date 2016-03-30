@@ -19,6 +19,15 @@
     font-style: italic;
 }
 
+ .total-input {
+  margin-left: 5px;
+  font-size: 14px;
+  font-style: normal;
+  height: inherit;
+  width: 35px;
+  text-align: right;
+}
+
 </style>
 
 <template>
@@ -80,8 +89,25 @@
                 </table>
             </form>
         </div>
-        <div slot="right-footer">
-            <button @click="this.$dispatch('next')">Interrogation <i class="ion-clipboard"></i></button>
+        <div slot="right-footer" class="right-footer">
+            <button v-show="!startingInterrogation"
+                    @click="startInterrogation"
+                    class="interrogation-button">
+              Interrogation <i class="ion-clipboard"></i>
+            </button>
+            <div v-else>
+		<form @submit.prevent="this.$dispatch('next')">
+		    <button type="submit">
+			<i class="ion-checkmark"></i>
+		    </button>
+		    <input class="total-input"
+			   type="number" step="1" min="1" v-model="total"
+			   @keyup.esc="stopInterrogation" v-el:total-input/>
+		    <button type="button" @click="stopInterrogation">
+			<i class="ion-close"></i>
+		    </button>
+		</form>
+            </div>
         </div>
     </view>
 </div>
@@ -99,7 +125,8 @@ export default {
     },
 
     props: {
-        data: Object
+        data: Object,
+        total: Number
     },
 
     ready() {
@@ -111,7 +138,8 @@ export default {
             sortOrder: 1,
             sortKey: "native",
             newNative: "",
-            newOther: ""
+            newOther: "",
+            startingInterrogation: false
         };
     },
 
@@ -140,6 +168,15 @@ export default {
                 this.newOther = "";
                 this.$els.input.focus();
             }
+        },
+        startInterrogation: function() {
+          this.startingInterrogation = true;
+            //TODO: figure out why this doesnt work
+          this.$els.totalInput.focus();
+        },
+        stopInterrogation: function() {
+          this.startingInterrogation = false;
+          this.$els.input.focus();
         }
     }
 }

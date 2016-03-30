@@ -79,19 +79,32 @@ export default {
         Interrogation
     },
 
-    data() {
+     ready() {
+	 window.addEventListener("storage", function(e) {
+	     //TODO: figure out why this won't work.
+	     this.data = JSON.stringify(e.newValue);
+	     console.log(this.data);
+	 }, false);
+     },
+     data() {
+	let initialData = JSON.parse(localStorage.getItem("voc-data"));
         return {
             currentView: "Native",
-            data: {
-                native: "",
-                selectedLanguage: 0,
-                languages: [],
-                words: []
-            },
             back: false,
-            error: false
+            error: false,
+	    data: initialData
         }
     },
+
+     watch: {
+	 "data": {
+	     handler: function (val, oldVal) {
+		 localStorage.setItem("voc-data", JSON.stringify(val));
+	     },
+	     deep: true
+	 }
+     },
+
     events: {
         "error": function() {
             this.error = true;

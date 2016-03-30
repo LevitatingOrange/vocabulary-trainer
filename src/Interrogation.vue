@@ -142,7 +142,7 @@ export default {
             setTimeout(_ => this.showLastResult = false, 500);
         },
         selectNewWord: function() {
-            if (this.counter >= this.total) {
+            if (this.counter > this.total) {
                 this.finished = true;
             } else {
                 const length = this.data.words[this.data.selectedLanguage].length;
