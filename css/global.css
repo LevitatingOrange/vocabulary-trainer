@@ -18,17 +18,7 @@ body {
 }
 
 .view {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    max-height: 100vh;
 }
 
 .header-bar {

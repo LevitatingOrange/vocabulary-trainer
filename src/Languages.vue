@@ -72,7 +72,7 @@
 
         methods: {
             addLanguage: function () {
-                if (!this.newLanguage || /^\s*$/.test(this.newLanguage)) {
+                if (!this.newLanguage || /^\s*$/.test(this.newLanguage) || this.data.languages.indexOf(this.newLanguage) != -1) {
                     this.$dispatch('error');
                 } else {
                     this.data.languages.push(this.newLanguage);

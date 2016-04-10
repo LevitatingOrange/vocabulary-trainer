@@ -43,6 +43,13 @@
     .last-result i {
         width: 50px;
     }
+    
+    .interrogation {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
 </style>
 
@@ -63,7 +70,7 @@
                     <span class="wrong">{{ counter - counterCorrect}}</span>
                 </div>
             </div>
-            <div slot="content" class="content" v-else>
+            <div slot="content" class="content interrogation" v-else>
                 <div class="language">
                     {{ reverse ? data.native : data.languages[data.selectedLanguage] }}
                     <i class="ion-arrow-right-c"></i> {{ reverse ? data.languages[data.selectedLanguage] : data.native
@@ -144,7 +151,7 @@
                 setTimeout(_ => this.showLastResult = false, 500);
             },
             selectNewWord: function () {
-                if (this.counter > this.total) {
+                if (this.counter >= this.total) {
                     this.finished = true;
                 } else {
                     const length = this.data.words[this.data.selectedLanguage].length;
